@@ -1,0 +1,6 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="Run tests" type="PHPUnitRunConfigurationType" factoryName="PHPUnit">
+    <TestRunner bootstrap_file="$PROJECT_DIR$/../Foundation/vendor/autoload.php" class="ArrayableTest" configuration_file="$PROJECT_DIR$/../Foundation/phpunit.xml" directory="$PROJECT_DIR$/../Foundation/tests" file="$PROJECT_DIR$/../Foundation/tests/ArrayableTest.php" use_alternative_bootstrap_file="true" use_alternative_configuration_file="true" />
+    <method v="2" />
+  </configuration>
+</component>
