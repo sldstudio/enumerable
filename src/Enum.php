@@ -29,12 +29,9 @@ class Enum
     public function __construct(string $value)
     {
         // Fill allowed values with defined constants
-        if(empty($this->allowedValues)) {
-            $this->allowedValues = (new ReflectionClass(static::class))
-                ->getConstants();
-        }
+        $this->allowedValues = self::options();
 
-        if(!in_array($value, $this->allowedValues, false)) {
+        if(!self::isValid($value)) {
             throw new InvalidEnumValueException($this, $value);
         }
 
@@ -43,7 +40,24 @@ class Enum
 
     /**
      * @param string $value
+     * @return bool
+     */
+    public static function isValid(string $value): bool {
+        return in_array($value, self::options(), false);
+    }
+
+    /**
+     * @return array
+     */
+    public static function options(): array {
+        return (new ReflectionClass(static::class))
+            ->getConstants();
+    }
+
+    /**
+     * @param string $value
      * @return static
+     * @throws \Solid\Foundation\Exceptions\InvalidEnumValueException
      */
     public static function of(string $value): Enum
     {
