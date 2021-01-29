@@ -22,13 +22,20 @@ class EnumTest extends TestCase
 
     public function testValidEnumValueOther(): void
     {
+        static::assertTrue(_TestCaseEnum::isValid(_TestCaseEnum::OPTION1));
         $enum = _TestCaseEnum::of(_TestCaseEnum::OPTION1);
         static::assertFalse($enum->is(_TestCaseEnum::OPTION3));
     }
 
     public function testInValidEnumValue(): void
     {
+        static::assertFalse(_TestCaseEnum::isValid('invalid'));
         $this->expectException(InvalidEnumValueException::class);
         _TestCaseEnum::of('invalid');
+    }
+
+    public function testOptions(): void {
+        static::assertIsArray(_TestCaseEnum::options());
+        static::assertNotEmpty(_TestCaseEnum::options());
     }
 }
