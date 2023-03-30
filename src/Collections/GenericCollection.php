@@ -33,7 +33,7 @@ abstract class GenericCollection extends Collection
      * @param V[] $values
      * @return $this
      */
-    final public function push(...$values)
+    final public function push(...$values): self
     {
         foreach ($values as $value) {
             if (!$this->isValidValue($value)) {
@@ -52,7 +52,7 @@ abstract class GenericCollection extends Collection
      *
      * @return $this
      */
-    final public function put($key, $value)
+    final public function put($key, $value): self
     {
         if (!$this->isValidValue($value)) {
             throw new UnexpectedValueException;
@@ -66,7 +66,7 @@ abstract class GenericCollection extends Collection
      * @
      * @return $this
      */
-    final public function add($item)
+    final public function add($item): self
     {
         if (!$this->isValidValue($item)) {
             throw new UnexpectedValueException;
