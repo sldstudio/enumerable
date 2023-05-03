@@ -9,15 +9,21 @@ use Solid\Foundation\Exceptions\UnexpectedValueException;
  * @template V
  * @template K
  * @template-extends Collection<V, K>
+ * @psalm-template V
+ * @psalm-template K
  */
 abstract class GenericCollection extends Collection
 {
     /**
      * @param V[] $items
+     * @psalm-param V[] $items
      */
     public function __construct($items = [])
     {
-        /** @var V[] $items */
+        /**
+         * @var V[] $items
+         * @psalm-var V[] $items
+         */
         $items = $this->getArrayableItems($items);
 
         foreach ($items as $item) {
@@ -31,6 +37,7 @@ abstract class GenericCollection extends Collection
 
     /**
      * @param V[] $values
+     * @psalm-param V[] $values
      * @return $this
      */
     final public function push(...$values): self
@@ -50,6 +57,9 @@ abstract class GenericCollection extends Collection
      * @param K $key
      * @param V $value
      *
+     * @psalm-param K $key
+     * @psalm-param V $value
+     *
      * @return $this
      */
     final public function put($key, $value): self
@@ -63,7 +73,8 @@ abstract class GenericCollection extends Collection
 
     /**
      * @param V $item
-     * @
+     * @psalm-param V $item
+     *
      * @return $this
      */
     final public function add($item): self
@@ -78,6 +89,10 @@ abstract class GenericCollection extends Collection
     /**
      * @param K $key
      * @param V $value
+     *
+     * @psalm-param K $key
+     * @psalm-param V $value
+     *
      * @return void
      */
     final public function offsetSet($key, $value)
@@ -87,6 +102,15 @@ abstract class GenericCollection extends Collection
         }
 
         parent::offsetSet($key, $value);
+    }
+
+    /**
+     * @param callable $callback
+     * @return Collection
+     */
+    final public function map(callable $callback): Collection
+    {
+        return collect($this->items)->map($callback);
     }
 
     /**
