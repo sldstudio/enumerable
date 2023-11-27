@@ -23,7 +23,7 @@
     }
   },
   "require": {
-    "php": "7.*",
+    "php": "8.*|7.*",
     "ext-reflection": "*",
     "nesbot/carbon": "^2.43",
     "illuminate/collections": "^8.83"
